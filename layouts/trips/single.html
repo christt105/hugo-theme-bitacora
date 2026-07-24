@@ -1,0 +1,16 @@
+{{ define "main" }}
+<div class="day-hero">
+  {{ with .Params.cover }}
+  <div class="hero-bg" style="background-image: url('{{ . }}')"></div>
+  {{ end }}
+  <a class="back-link" href="{{ .Parent.RelPermalink }}">← {{ .Parent.Title }}</a>
+  <div class="hero-content">
+    {{ with .Date }}<p class="day-date">{{ partial "fecha-es.html" . }}</p>{{ end }}
+    <h1 class="hero-title">{{ .Title }}</h1>
+  </div>
+</div>
+
+<article class="day-content">
+  {{ .Content }}
+</article>
+{{ end }}

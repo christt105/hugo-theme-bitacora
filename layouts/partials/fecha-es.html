@@ -1,0 +1,5 @@
+{{- $meses := slice "" "enero" "febrero" "marzo" "abril" "mayo" "junio" "julio" "agosto" "septiembre" "octubre" "noviembre" "diciembre" -}}
+{{- $dias := slice "domingo" "lunes" "martes" "miércoles" "jueves" "viernes" "sábado" -}}
+{{- $m := .Format "1" | int -}}
+{{- $w := .Weekday | int -}}
+{{- printf "%s, %d de %s de %d" (index $dias $w) .Day (index $meses $m) .Year -}}

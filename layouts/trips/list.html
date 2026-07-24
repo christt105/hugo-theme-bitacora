@@ -1,0 +1,53 @@
+{{ define "main" }}
+{{ if .Parent.IsHome }}
+  <meta http-equiv="refresh" content="0; url=/">
+{{ else if .Pages }}
+
+{{/* ── Viaje con días ── */}}
+<div class="trip-hero">
+  <div class="hero-bg" style="background-image: url('{{ .Params.cover }}')"></div>
+  <a class="back-link" href="/">{{ i18n "back_home" }}</a>
+  <div class="hero-content">
+    <h1 class="hero-title">{{ .Title }}</h1>
+    {{ with .Params.date_range }}<p class="trip-meta">{{ . }}</p>{{ end }}
+  </div>
+</div>
+
+<div class="section-wrap">
+  <p class="section-label">{{ i18n "section_days" }}</p>
+  <div class="gallery-grid">
+    {{ range .Pages.ByDate }}
+      <a class="card" href="{{ .RelPermalink }}">
+        {{ with .Params.cover }}
+        <div class="card-bg" style="background-image: url('{{ . }}')"></div>
+        {{ end }}
+        <div class="card-content">
+          {{ with .Date }}<p class="card-date">{{ partial "fecha-es.html" . }}</p>{{ end }}
+          <h2 class="card-title">{{ .Title }}</h2>
+        </div>
+      </a>
+    {{ end }}
+  </div>
+</div>
+
+{{ else }}
+
+{{/* ── Hilo de Twitter ── */}}
+<div class="trip-hero">
+  {{ with .Params.cover }}
+  <div class="hero-bg" style="background-image: url('{{ . }}')"></div>
+  {{ end }}
+  <a class="back-link" href="/">{{ i18n "back_home" }}</a>
+  <div class="hero-content">
+    <p class="hero-eyebrow">{{ i18n "twitter_thread" }} · {{ .Params.tweet_count }} {{ i18n "tweets" }}</p>
+    <h1 class="hero-title">{{ .Title }}</h1>
+    {{ with .Params.date_range }}<p class="trip-meta">{{ . }}</p>{{ end }}
+  </div>
+</div>
+
+<article class="hilo-content">
+  {{ .Content }}
+</article>
+
+{{ end }}
+{{ end }}

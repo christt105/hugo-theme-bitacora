@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ if .IsHome }}Las aventuras de Haku{{ else }}{{ .Title }} · Las aventuras de Haku{{ end }}</title>
+  <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+  {{- block "main" . }}{{ end }}
+</body>
+</html>

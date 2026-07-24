@@ -1,0 +1,30 @@
+{{ define "main" }}
+<section class="hero">
+  <div class="hero-bg" style="background-image: url('/images/main-cover.jpg')"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">{{ i18n "home_eyebrow" }}</p>
+    <h1 class="hero-title">{{ .Site.Title }}</h1>
+    {{ with .Site.Params.subtitle }}<p class="hero-subtitle">{{ . }}</p>{{ end }}
+  </div>
+  <div class="hero-scroll">Scroll</div>
+</section>
+
+<div class="section-wrap">
+  <p class="section-label">{{ i18n "section_trips" }}</p>
+  <div class="gallery-grid">
+    {{ with .Site.GetPage "/trips" }}
+      {{ range .Sections }}
+        <a class="card" href="{{ .RelPermalink }}">
+          {{ with .Params.cover }}
+          <div class="card-bg" style="background-image: url('{{ . }}')"></div>
+          {{ end }}
+          <div class="card-content">
+            {{ with .Params.date_range }}<p class="card-date">{{ . }}</p>{{ end }}
+            <h2 class="card-title">{{ .Title }}</h2>
+          </div>
+        </a>
+      {{ end }}
+    {{ end }}
+  </div>
+</div>
+{{ end }}
