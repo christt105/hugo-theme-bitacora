@@ -7,8 +7,8 @@
   <link rel="stylesheet" href="/css/main.css">
 
   {{- $ogImage := "" }}
-  {{- with .Params.cover }}
-    {{- $ogImage = . | absURL }}
+  {{- if .Params.cover }}
+    {{- $ogImage = .Params.cover | absURL }}
   {{- else if .IsHome }}
     {{- $ogImage = "/images/main-cover.jpg" | absURL }}
   {{- end }}
