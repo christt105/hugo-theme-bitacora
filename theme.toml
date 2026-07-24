@@ -5,7 +5,7 @@ description = "A minimal Hugo theme for travel blogs, with support for day-by-da
 homepage = "https://github.com/christt105/hugo-theme-bitacora"
 tags = ["travel", "blog", "gallery", "minimal", "dark"]
 features = ["day diary", "gallery grid", "i18n", "responsive"]
-min_version = "0.140.0"
+min_version = "0.140.2"
 
 [author]
   name = "christt105"

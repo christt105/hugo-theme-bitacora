@@ -5,6 +5,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{ if .IsHome }}Las aventuras de Haku{{ else }}{{ .Title }} · Las aventuras de Haku{{ end }}</title>
   <link rel="stylesheet" href="/css/main.css">
+
+  {{- $ogImage := "" }}
+  {{- with .Params.cover }}
+    {{- $ogImage = . | absURL }}
+  {{- else if .IsHome }}
+    {{- $ogImage = "/images/main-cover.jpg" | absURL }}
+  {{- end }}
+  {{- $ogDesc := .Description | default (.Summary | plainify | truncate 200) | default .Site.Params.subtitle }}
+
+  <meta property="og:type" content="{{ if .IsHome }}website{{ else }}article{{ end }}">
+  <meta property="og:title" content="{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} · {{ .Site.Title }}{{ end }}">
+  {{- with $ogDesc }}
+  <meta property="og:description" content="{{ . }}">
+  {{- end }}
+  {{- with $ogImage }}
+  <meta property="og:image" content="{{ . }}">
+  {{- end }}
+  <meta property="og:url" content="{{ .Permalink }}">
+  <meta property="og:site_name" content="{{ .Site.Title }}">
+  <meta name="twitter:card" content="{{ if $ogImage }}summary_large_image{{ else }}summary{{ end }}">
+  {{- range .AlternativeOutputFormats }}
+  <link rel="{{ .Rel }}" type="{{ .MediaType.Type }}" href="{{ .Permalink | safeURL }}" title="{{ $.Site.Title }}">
+  {{- end }}
 </head>
 <body>
   {{- block "main" . }}{{ end }}
